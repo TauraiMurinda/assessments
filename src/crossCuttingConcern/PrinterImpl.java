@@ -1,4 +1,4 @@
-package CrossCuttingConcern;
+package crossCuttingConcern;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,8 +13,7 @@ import model.Hand;
 public class PrinterImpl implements Printer {
 	private Collection<Card> cardsofDeck = null;
 
-	public PrinterImpl(Collection<Card> cardsofDeck) {
-		this.cardsofDeck = cardsofDeck;
+	public PrinterImpl() {
 	}
 
 	public PrinterImpl(Map<Hand, List<String>> values) {
@@ -26,7 +25,7 @@ public class PrinterImpl implements Printer {
 	}
 
 	@Override
-	public void print() {
+	public void print(Collection<Card> cardsofDeck) {
 		Iterator<Card> iter = cardsofDeck.iterator();
 		int suitLine = 0;
 		while (iter.hasNext()) {
@@ -39,6 +38,12 @@ public class PrinterImpl implements Printer {
 			}
 		}
 
+	}
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -1,4 +1,6 @@
 Manifest-Version: 1.0
-Class-Path: .
-Main-Class: Controller.GameApplication
+Built-By: Taurai
+Class-Path: .;./bin
+Main-Class: bin.controller.GameApplication
+
 
