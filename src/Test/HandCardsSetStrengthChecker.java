@@ -72,38 +72,27 @@ public class HandCardsSetStrengthChecker {
 		List<String> seq = new ArrayList<String>();
 		List<Suit> suit1 = new ArrayList<>();
 		List<Suit> suit2 = new ArrayList<>();
-		Map<Suit,Integer> same_1 = new HashMap<>();
-		
-		
-		
-		
+		Map<Suit, Integer> same_1 = new HashMap<>();
 
 		for (Entry<Hand, List<Suit>> me : suits.entrySet()) {
 			suit1 = me.getValue();
 			suit2 = me.getValue();
 		}
-		
-		int z = 0;
-		
-		Iterator<Suit> s = suit1.iterator();
-		while(s.hasNext()) {
-			Suit l = s.next();
-        	same_1.put(l,Collections.frequency(suit1, l));
 
-	        
+		int z = 0;
+
+		Iterator<Suit> s = suit1.iterator();
+		while (s.hasNext()) {
+			Suit l = s.next();
+			same_1.put(l, Collections.frequency(suit1, l));
+
 		}
-		
-		
-		
-		for(Map.Entry<Suit,Integer> same : same_1.entrySet()) {
-			
-			   System.out.println(same.getKey() + "_________________" + (same.getValue()));
+
+		for (Map.Entry<Suit, Integer> same : same_1.entrySet()) {
+
+			System.out.println(same.getKey() + "_________________" + (same.getValue()));
 		}
-		
-		
-		
-		
-		
+
 		/*
 		 * Iterator<Suit> outer = suit1.iterator (); while (outer.hasNext ()) { Suit
 		 * outerChain = outer.next(); Iterator<Suit> inner = suit2.iterator (); while

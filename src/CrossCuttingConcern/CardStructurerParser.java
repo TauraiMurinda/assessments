@@ -12,32 +12,29 @@ import utility.Ranks;
 import utility.Suit;
 
 public class CardStructurerParser {
- 
-	private List<Character> elements = new ArrayList<>();
 
+	private List<Character> elements = new ArrayList<>();
 
 	public List<Character> getElements() {
 		return elements;
 	}
 
+	public CardStructurerParser(Set<Card> handCards) {
 
-	public CardStructurerParser(Set<Card> handCards ) {
-				
 		Iterator<Card> iter = handCards.iterator();
- 		char symbol = 0;
+		char symbol = 0;
 
-		while(iter.hasNext()) {
-			
+		while (iter.hasNext()) {
+
 			String str = iter.next().toString();
-			if(str.length()>2) {
+			if (str.length() > 2) {
 				symbol = str.charAt(2);
 				elements.add(symbol);
-			}
-			else{
+			} else {
 				symbol = str.charAt(1);
 				elements.add(symbol);
 			}
 		}
 	}
-	
+
 }

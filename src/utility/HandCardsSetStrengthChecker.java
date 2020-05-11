@@ -44,10 +44,10 @@ public class HandCardsSetStrengthChecker {
 		parseCardofHand();
 	}
 
-	
 	Map<Hand, List<Suit>> suitSame = new HashMap<>();
 	Map<Hand, List<Suit>> suitDiff = new HashMap<>();
 	Map<Hand, List<String>> wildCar = new HashMap<>();
+
 	void parseCardofHand() {
 
 		List<Card> listCard = new ArrayList<>();
@@ -67,23 +67,15 @@ public class HandCardsSetStrengthChecker {
 
 		List<String> listSame = new ArrayList<String>();
 		List<String> listdiff = new ArrayList<String>();
-		List<String> seq =   new ArrayList<String>();
+		List<String> seq = new ArrayList<String>();
 		List<Suit> suit = new ArrayList<>();
 		List<Suit> su = new ArrayList<>();
 		List<Suit> same = new ArrayList<>();
-		List<Suit>listdif = new ArrayList<>();
-
-
-		
-	
-		
-		
-		
+		List<Suit> listdif = new ArrayList<>();
 
 		for (Entry<Hand, List<Suit>> me : suits.entrySet()) {
 			suit = me.getValue();
 			int x = 0;
-			
 
 			for (Suit ran : suit) {
 				if (same.contains(ran) && (!(same.size() == 0))) {
@@ -108,39 +100,20 @@ public class HandCardsSetStrengthChecker {
 						same.remove(same.get(0));
 
 					}
-					
-					//System.out.println("here");
-					/*
-					 * int y =0; if(Integer.valueOf(listdiff.get(y)) -
-					 * Integer.valueOf(ran.toString()) ==1) { //System.out.println("here");
-					 * seq.add(listdiff.get(y)); seq.add(ran.toString().trim());
-					 * //listdiff.remove(listdiff.get(y));
-					 * 
-					 * y++; }
-					 */
-					
-					
-	
-
-
 
 				}
 			}
-          
+
 			suitSame.put(hand, same);
 			suitDiff.put(hand, listdif);
-			//sequential.put(hand,seq);
-			//System.out.println(seq);
-			System.out.println("herreeeee: " +  (listdif.size()) + " ");
+			// sequential.put(hand,seq);
+			// System.out.println(seq);
+			System.out.println("herreeeee: " + (listdif.size()) + " ");
 			listdif = null;
 
 			break;
 
 		}
-		
-
-		
-
 
 		for (Entry<Hand, List<Ranks>> me : rank.entrySet()) {
 			List<Ranks> listRang = me.getValue();
@@ -154,7 +127,6 @@ public class HandCardsSetStrengthChecker {
 					if (listSame.size() == 0) {
 						listSame.add(ran.toString().trim());
 						++x;
-
 					}
 
 					if (!listSame.contains(ran.toString().trim())) {
@@ -166,32 +138,25 @@ public class HandCardsSetStrengthChecker {
 						listdiff.add(listSame.get(0).trim());
 						listSame.remove(listSame.get(0).trim());
 
-
 					}
-					
-					//System.out.println("here");
-					
-					int y =0;
-					if(Integer.valueOf(listdiff.get(y)) - Integer.valueOf(ran.toString()) ==1) {
-						//System.out.println("here");
+
+					// System.out.println("here");
+
+					int y = 0;
+					if (Integer.valueOf(listdiff.get(y)) - Integer.valueOf(ran.toString()) == 1) {
+						// System.out.println("here");
 						seq.add(listdiff.get(y));
 						seq.add(ran.toString().trim());
-						//listdiff.remove(listdiff.get(y));
+						// listdiff.remove(listdiff.get(y));
 
 						y++;
 					}
-					
-					
-	
-
-
-
 				}
 			}
-          
+
 			sameRank.put(hand, listSame);
 			different.put(hand, listdiff);
-			sequential.put(hand,seq);
+			sequential.put(hand, seq);
 			System.out.println(seq);
 			break;
 

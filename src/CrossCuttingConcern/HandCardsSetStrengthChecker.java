@@ -15,10 +15,10 @@ import utility.Suit;
 
 public class HandCardsSetStrengthChecker {
 
-	Map<Hand, List<Card>> pokerHand = new HashMap<>();
-	Map<Hand, List<Ranks>> rank = new HashMap<>();
-	Map<Hand, List<Suit>> suits = new HashMap<>();
-	Map<Hand, List<String>> sameRank = new HashMap<>();
+	private Map<Hand, List<Card>> pokerHand = new HashMap<>();
+	private Map<Hand, List<Ranks>> rank = new HashMap<>();
+	private Map<Hand, List<Suit>> suits = new HashMap<>();
+	private Map<Hand, List<String>> sameRank = new HashMap<>();
 
 	public Map<Hand, List<String>> getSameRank() {
 		return sameRank;
@@ -36,9 +36,7 @@ public class HandCardsSetStrengthChecker {
 		this.different = different;
 	}
 
-	Map<Hand, List<String>> sequential = new HashMap<>();
-	Map<Hand, List<String>> different = new HashMap<>();
-	Map<Hand, List<String>> wildCard = new HashMap<>();
+	private Map<Hand, List<String>> different = new HashMap<>();
 	Hand hand;
 
 	public HandCardsSetStrengthChecker(Hand hand) {
@@ -47,11 +45,9 @@ public class HandCardsSetStrengthChecker {
 		parseCardofHand();
 	}
 
-	Map<Hand, List<Suit>> suitSame = new HashMap<>();
-	Map<Hand, List<Suit>> suitDiff = new HashMap<>();
-	Map<Hand, List<String>> wildCar = new HashMap<>();
+	private Map<Suit, Integer> handSuit = new HashMap<>();
 
-	void parseCardofHand() {
+	private void parseCardofHand() {
 
 		List<Card> listCard = new ArrayList<>();
 		List<Ranks> listRank = new ArrayList<>();
@@ -68,103 +64,91 @@ public class HandCardsSetStrengthChecker {
 			suits.put(me.getKey(), listSuit);
 		}
 
-		List<String> listSame = new ArrayList<String>();
-		List<String> listdiff = new ArrayList<String>();
-		List<String> seq = new ArrayList<String>();
 		List<Suit> suit1 = new ArrayList<>();
 		List<Suit> suit2 = new ArrayList<>();
-		Map<Suit,Integer> same_1 = new HashMap<>();
-		
-		
-		
-		
 
 		for (Entry<Hand, List<Suit>> me : suits.entrySet()) {
 			suit1 = me.getValue();
 			suit2 = me.getValue();
 		}
-		
+
 		int z = 0;
-		
 		Iterator<Suit> s = suit1.iterator();
-		while(s.hasNext()) {
+		while (s.hasNext()) {
 			Suit l = s.next();
-        	same_1.put(l,Collections.frequency(suit1, l));
+			handSuit.put(l, Collections.frequency(suit1, l));
 
-	        
 		}
-		
-		
-		
-		for(Map.Entry<Suit,Integer> same : same_1.entrySet()) {
-			
-			   System.out.println(same.getKey() + "_________________" + (same.getValue()));
-		}
-		
-		Map<Ranks,Integer> sameRa = new HashMap<>();
+
+		// System.out.println("handei " + Collections.max(suit1));
+
+		Map<Ranks, Integer> sameRa = new HashMap<>();
 		Iterator<Ranks> ra = listRank.iterator();
-		while(ra.hasNext()) {
+		while (ra.hasNext()) {
 			Ranks l = ra.next();
-			sameRa.put(l,Collections.frequency(listRank, l));
-
-	        
+			sameRa.put(l, Collections.frequency(listRank, l));
 		}
-		
-		Collection<Integer>listInteger = new ArrayList<Integer>();
-		  int frequency =  0;
 
-		for(Map.Entry<Ranks,Integer> same : sameRa.entrySet()) {
-			    listInteger = sameRa.values();
-			  // System.out.println(same.getKey() + "_________________" + (same.getValue()));
-			   
-			  frequency =  Collections.max(listInteger);
-			  
-			  
-			  
-			  System.out.println("frequency "+frequency);
+		Collection<Integer> listInteger = new ArrayList<Integer>();
+		int frequency = 0;
+
+		for (Map.Entry<Ranks, Integer> same : sameRa.entrySet()) {
+			listInteger = sameRa.values();
+			// System.out.println(same.getKey() + "_________________" + (same.getValue()));
+			frequency = Collections.max(listInteger);
+			// System.out.println("frequency "+frequency);
 		}
-			   
-			   switch (frequency) {
-			   
-			   case 1:
-				   strength = "Different cards\n";
-             	   System.out.print(strength);
-				break;
-						   				
-              case 2:
-            	   strength = "One pair\\n";
-             	   System.out.print("One pair\n");
-				break;
-				
-				
-              case 3:
-              	   System.out.print("Three of a Kind\n");
-            	  break;
-            	  
-              case 4 : 
-           	   System.out.print("four of a Kind\\n");
-            	  break;
-              
-              case 5 :
-            	   System.out.print("Four of a Kind\n");
-            	  break;
 
-			default:
-				break;
-			}
-		
-		
-	
-		/*
-		 * 1. Straight Flush 2. Four of a Kind 3. Full House 4. Flush 5. Straight 6.
-		 * Three of a Kind 7. Two Pair 8. One Pair 9. High Cards
-		 */
-		
-		
+		switch (frequency) {
 
-		
+		case 1:
+			isFlush(handSuit);
+			break;
+
+		case 2:
+			setStrength("One pair");
+			break;
+
+		case 3:
+			setStrength("Three of a Kind");
+			break;
+
+		case 4:
+			setStrength("four of a Kind");
+			break;
+
+		case 5:
+			setStrength("Four of a Kind");
+			break;
+
+		default:
+			break;
+		}
 
 	}
-	
-	public String strength;
+
+	public void isFlush(Map<Suit, Integer> handSuitRecord) {
+		List<Integer> suitFrequencyRecordings = new ArrayList<Integer>();
+		for (Map.Entry<Suit, Integer> handSuitRecord1 : handSuitRecord.entrySet()) {
+			suitFrequencyRecordings.add(handSuitRecord1.getValue());
+			int suitFrequency = Collections.max(suitFrequencyRecordings);
+			if (suitFrequency == 4 | suitFrequency == 5) {
+				System.out.println("helo here");
+				setStrength("flush");
+			} else {
+				setStrength("strength to be determined");
+
+			}
+		}
+	}
+
+	public String getStrength() {
+		return strength;
+	}
+
+	public void setStrength(String strength) {
+		this.strength = strength;
+	}
+
+	private String strength;
 }

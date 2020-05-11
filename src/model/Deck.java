@@ -13,28 +13,25 @@ import model.Hand;
 
 public class Deck {
 
- private Card card;
- private static final int deckCardsTotalNumber = 52;
- private static final int suitSize = 4;
- private static final int ranksSize =13;
- private static final Card[][] deck = new Card[deckCardsTotalNumber/suitSize][deckCardsTotalNumber/ranksSize];
- private List<Card> cards  = new ArrayList<Card>();
- 
+	private Card card;
+	private static final int deckCardsTotalNumber = 52;
+	private static final int suitSize = 4;
+	private static final int ranksSize = 13;
+	private static final Card[][] deck = new Card[deckCardsTotalNumber / suitSize][deckCardsTotalNumber / ranksSize];
+	private List<Card> cards = new ArrayList<Card>();
 
-public final List<Card> getDeckOfCards() {
-	  
-		 for(Suit s_c_c : Suit.values()) {
-			  for(Ranks ranks : Ranks.values()) {	 
+	public final List<Card> getDeckOfCards() {
 
-			 this.card=this.deck[ranks.ordinal()][s_c_c.ordinal()]  = new Card(ranks, s_c_c);
-			 cards.add(card);
-		 }
-	  }
-	  
-	return cards;
-	  
-  }
+		for (Suit s_c_c : Suit.values()) {
+			for (Ranks ranks : Ranks.values()) {
 
+				this.card = this.deck[ranks.ordinal()][s_c_c.ordinal()] = new Card(ranks, s_c_c);
+				cards.add(card);
+			}
+		}
 
-  
+		return cards;
+
+	}
+
 }

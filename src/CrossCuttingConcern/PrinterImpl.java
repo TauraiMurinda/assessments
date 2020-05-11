@@ -11,52 +11,34 @@ import model.Card;
 import model.Hand;
 
 public class PrinterImpl implements Printer {
-	private Collection<Card> cardsofDeck   =null;
+	private Collection<Card> cardsofDeck = null;
 
-	
-		 public PrinterImpl(Collection<Card> cardsofDeck ) {
-		    this.cardsofDeck = cardsofDeck;
-	      }
-		 
-		
+	public PrinterImpl(Collection<Card> cardsofDeck) {
+		this.cardsofDeck = cardsofDeck;
+	}
 
+	public PrinterImpl(Map<Hand, List<String>> values) {
+		for (Entry<Hand, List<String>> me : values.entrySet()) {
 
+			System.out.println("my name is " + me.getKey());
+			System.out.print(me.getValue());
+		}
+	}
 
-public PrinterImpl(Map<Hand, List<String>> values) {
-	
-	for(Entry<Hand, List<String>> me :values.entrySet()) {
-		
-		   System.out.println("my name is "+ me.getKey());
-		   System.out.print(me.getValue());
-		
-	     }
-	
-	
-	
-
+	@Override
+	public void print() {
+		Iterator<Card> iter = cardsofDeck.iterator();
+		int suitLine = 0;
+		while (iter.hasNext()) {
+			if (suitLine < 12) {
+				System.out.print(iter.next() + "\t");
+				suitLine++;
+			} else {
+				System.out.println(iter.next());
+				suitLine = 0;// reset to suitLine
+			}
 		}
 
-
-
-
-
-@Override
-public void print() {
-	Iterator<Card> iter  = cardsofDeck.iterator();
-	int suitLine = 0;
-	while(iter.hasNext()) {
-		if(suitLine < 12) {
-		System.out.print(iter.next() + "\t");
-		suitLine++;
-	}else {
-		System.out.println(iter.next());
-		suitLine=0;//reset to suitLine
 	}
-}
-	//System.out.println("\n" );
-	
-}
 
 }
-
-
