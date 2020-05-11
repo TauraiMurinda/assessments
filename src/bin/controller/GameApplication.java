@@ -26,7 +26,6 @@ public class GameApplication {
 		}
 
 		ShuffleService shuffleService = new ShuffleService(cardsofDeck);
-		System.out.println("--------------------------Shuffling---------------------shuflling-------------------------");
 
 		System.out.format("%s ", "Do wish to display your shuffled cards  Y/n :", System.getProperty("line.separator"));
 		if (scanner.nextLine().trim().equalsIgnoreCase("Y")) {
@@ -49,6 +48,12 @@ public class GameApplication {
 		printer.print(handInPoker.getHandSetOfCards());
 		System.out.println();
 		System.out.println("You have: " + hcs.getStrength());
+		
+		
+		System.out.println();
+		System.out.println("The remaining cards are");
+		printer.print(shuffleService.getShuffledCards(singleHandOf_5_Cards));
+
 
 	}
 

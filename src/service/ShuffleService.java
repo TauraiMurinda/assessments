@@ -41,5 +41,14 @@ public class ShuffleService {
 		}
 		return shuffledCards;
 	}
+	
+	
+	public List<Card> getShuffledCards(int removeAllocated) {
+
+		for(int x =0; x<removeAllocated;x++) {
+			shuffledCards.remove(x);			
+		}
+		return shuffledCards;
+	}
 
 }

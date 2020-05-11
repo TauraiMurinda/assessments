@@ -32,8 +32,9 @@ public class DealService {
 		int cardCount = 0;
 		while (iter.hasNext()) {
 			cardCount++;
-			handSetOfCards.add(iter.next());
-			handSetOfCards.remove(cardCount); //remove allocated cards from shuffled cards
+			Card card = iter.next();
+			handSetOfCards.add(card);
+		    //remove allocated cards from shuffled cards
 			if (cardCount == 5) {
 				break;
 			}
